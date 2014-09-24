@@ -10,27 +10,25 @@ namespace Växelpengar
     {
         static void Main(string[] args)
         {
-            // Deklarerar variableer
+            // Deklarerar variabler
             double total;
             uint recieved;
             double roundingOffAmount;
             uint cash;
 
-            
-
-
-            {
-                // Skaffar indata från användarens tangentbord
+             {
+                // Skaffar indata från användaren.
 
                 Console.Write("Ange totalsumma     : ");
                 total = double.Parse(Console.ReadLine());
                 if (total < 1)
                 {
-                   //Felmeddelande 
+                   // Felmeddelande ifall användaren matar in en för liten summa.
+                    
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.WriteLine("Totalsumman är för liten");
                     Console.ResetColor();
-
+                    return;
                 }
                 else
                 {
@@ -38,7 +36,7 @@ namespace Växelpengar
                     // Skapar en while loop för att ge användaren nya chanser om man matar in text istället för siffror
                     while (true)
                     {
-                      //Fångar upp fel med try catch
+                        //Fångar upp fel med try catch.
                         try
                         {
                             Console.Write("Ange erhållet belopp: ");
@@ -46,11 +44,14 @@ namespace Växelpengar
                             cash = recieved;
                             if (recieved < total)
                             {
-                               //Felmeddelande 
+                                //Felmeddelande ifall mottaget belopp är för litet.
+
                                 Console.BackgroundColor = ConsoleColor.Red;
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.WriteLine("Erhållet belopp är för litet. Köpet kunde inte genomföras");
                                 Console.ResetColor();
+
+
                                 return;
                             }
                             else
@@ -64,34 +65,23 @@ namespace Växelpengar
                         catch
                         {
 
-
-
-
                             //felmeddelande
+
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("Erhållet belopp felaktigt");
                             Console.ResetColor();
 
+           }
+            }
+             {
+               {
+                 }
 
+                        //Beräknar erhållen data.
 
-                        }
-
-
-
-                    }
-
-                    {
-                        {
-
-
-
-                        }
-
-                        //Räknar om variablerna
-
-                        recieved = (uint)Math.Round(total);
-                        roundingOffAmount = recieved - total;
+                        recieved = (uint)Math.Round(total); 
+                        roundingOffAmount = recieved - total; //Öresavrundningen
                         uint payback;
                         payback = cash - (uint)total;
 
@@ -99,149 +89,123 @@ namespace Växelpengar
 
 
                         //Presenterar kvitto
+                        
                         Console.WriteLine("");
                         Console.WriteLine("KVITTO");
 
                         Console.WriteLine("----------------------------------");
 
-                        Console.WriteLine("Totalt           :       {0:c}", total);
+                        Console.WriteLine("Totalt           :{0,12:c}", total);
 
 
-                        Console.WriteLine("Öresavrundning   :        {0:c}", roundingOffAmount);
+                        Console.WriteLine("Öresavrundning   :{0,12:c}", roundingOffAmount);
 
-                        Console.WriteLine("Att betala       :       {0:c}", recieved - (uint)roundingOffAmount);
-
-
-                        Console.WriteLine("Kontant          :     {0:c}", cash);
+                        Console.WriteLine("Att betala       :{0,12:c}", recieved - (uint)roundingOffAmount);
 
 
-                        Console.WriteLine("Tillbaka         :       {0:c}", payback);
+                        Console.WriteLine("Kontant          :{0,12:c}", cash);
+
+
+                        Console.WriteLine("Tillbaka         :{0,12:c}", payback);
 
                         Console.WriteLine("----------------------------------");
 
+                       {
 
-
-
-
-                        
-
-
-
-
-
-
-                        {
-
-                           
-
-                            {
-                                
-                                Console.WriteLine("");
-
-                           // Presenterar sedlar/mynt som ska ges tillbaka i växel.
-
-                               
-                                // Variabler för division och modolusoperatorn.
-
-                                uint value;
-                                uint left;
-
-                           // Beräknar sedlar/mynt tillbaka genom att dividera 500 och ge ett värde till left som kan användas på nästa sedel/mynt och upprepar detta ända ner till 1.      
-                                    value = payback / 500;
-                                    left = payback % 500;
-                                
-                                // Omsluter alla sedlar med en if sats för att enbart visa ett värde högre än 0.
-                                    if (value > 0)
-                                    {
-                                        Console.WriteLine(" 500-lappar      :{0,2}", value); 
-                                    }
-
-
-
-
-                                    value = left / 100;
-                                    left = payback % 100;
-
-                                    if (value > 0)
-                                    {
-                                        Console.WriteLine(" 100-lappar      :{0,2}", value);  
-                                    }
+                           {
+                               //En tom rad i consolen för att separera kvitto och sedlar/mynt tillbaka
+                               Console.WriteLine("");
 
 
 
 
 
+                               // Variabler för division och modolusoperatorn, för presentation av kvitto.
 
-
-                                    value = left / 50;
-                                    left = payback % 50;
-
-                                    if (value > 0)
-                                    {
-                                        Console.WriteLine("  50-lappar      :{0,2}", value);  
-                                    }
-                               
-
-
-
-
+                               uint fiveHundred = payback / 500;
+                               uint left = payback % 500;
                               
-                                
-                                    value = left / 20;
-                                    left = payback % 20;
-
-                                    if (value > 0)
-                                    {
-                                        Console.WriteLine("  20-lappar      :{0,2}", value);  
-                                    }
-
-
-
-
-
-
-
-                                    value = left / 10;
-                                    left = payback % 10;
-
-                                    if (value > 0)
-                                    {
-                                        Console.WriteLine("  10-kronor      :{0,2}", value); 
-                                    }
-                                
+                               uint hundred = left / 100;
+                               left = left % 100;
+                              
+                               uint fifty = left / 50;
+                               left = left % 50;
+                              
+                               uint twenty = left / 20;
+                               left = left % 20;
+                              
+                               uint ten = left / 10;
+                               left = left % 10;
+                              
+                               uint five = left / 5;
+                               left = left % 5;
+                              
+                               uint one = left;
 
 
 
 
-                               
-                                
-                                    value = left / 5;
-                                    left = payback % 5;
 
-                                    if (value > 0)
-                                    {
-                                        Console.WriteLine("   5-kronor      :{0,2}", value);  
-                                    }
-                                
+                               // Omsluter alla sedlar med en if sats för att enbart visa ett värde högre än 0.
+
+                               if (fiveHundred > 0)
+                               {
+                                   Console.WriteLine(" 500-lappar      :{0,2}", fiveHundred);
+                               }
 
 
 
 
-                                
-                               
-                                    value = left / 1;
-                                    left = payback % 1;
+                               if (hundred > 0)
+                               {
+                                   Console.WriteLine(" 100-lappar      :{0,2}", hundred);
+                               }
 
-                                    if (value > 0)
-                                    {
-                                        Console.WriteLine("   1-kronor      :{0,2}", value);  
-                                    }
 
-                                    return;
-                                {
-                                }
 
-                            }
+
+                               if (fifty > 0)
+                               {
+                                   Console.WriteLine("  50-lappar      :{0,2}", fifty);
+                               }
+
+
+
+
+
+                               if (twenty > 0)
+                               {
+                                   Console.WriteLine("  20-lappar      :{0,2}", twenty);
+                               }
+
+
+
+                               if (ten > 0)
+                               {
+                                   Console.WriteLine("  10-kronor      :{0,2}", ten);
+                               }
+
+
+
+
+                               if (five > 0)
+                               {
+                                   Console.WriteLine("   5-kronor      :{0,2}", five);
+                               }
+
+
+
+
+                               if (one > 0)
+                               {
+                                   Console.WriteLine("   1-kronor      :{0,2}", one);
+                               }
+
+                               return;
+                               {
+
+                               }
+                           }
 
 
                         }
